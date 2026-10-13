@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمل المقاطع</title>
+    <!-- هذا السطر هو اللي بيهيئ الموقع عشان يصير تطبيق (PWA) مستقبلاً -->
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>تنزيل المقاطع 📥</h2>
+        <p>حط رابط المقطع هنا:</p>
+        <input type="text" id="videoLink" placeholder="انسخ الرابط والصقه هنا...">
+        <button onclick="downloadVideo()">تحميل المقطع</button>
+        <p id="status" style="margin-top: 15px; color: #555;"></p>
+    </div>
+
+    <script>
+        // هنا بنربط الزر بالمحرك اللي بنسويه بعدين
+        function downloadVideo() {
+            let link = document.getElementById("videoLink").value;
+            let status = document.getElementById("status");
+            
+            if(link === "") {
+                status.innerText = "الرجاء وضع الرابط أولاً!";
+                return;
+            }
+            
+            status.innerText = "جاري معالجة الرابط... ثواني بس ⏳";
+            // كود التحميل الفعلي بنضيفه هنا لما نجهز السيرفر
+        }
+    </script>
+
+</body>
+</html>
