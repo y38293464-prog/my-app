@@ -58,10 +58,8 @@
         <button onclick="downloadVideo()">تحميل المقطع</button>
         <p id="status" style="margin-top: 15px; color: #555;"></p>
     </div>
-
-    <script>
-        // هنا بنربط الزر بالمحرك اللي بنسويه بعدين
-        function downloadVideo() {
+<script>
+        async function downloadVideo() {
             let link = document.getElementById("videoLink").value;
             let status = document.getElementById("status");
             
@@ -71,9 +69,27 @@
             }
             
             status.innerText = "جاري معالجة الرابط... ثواني بس ⏳";
-            // كود التحميل الفعلي بنضيفه هنا لما نجهز السيرفر
+
+            try {
+                let response = await fetch("https://my-app-gilf.onrender.com/download", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ url: link })
+                });
+
+                let data = await response.json();
+
+                if (data.success) {
+                    status.innerHTML = `<a href="${data.download_link}" target="_blank" style="color: #28a745; font-weight: bold; text-decoration: none; display: block; margin-top: 10px;">✅ المقطع جاهز! اضغط هنا للتحميل</a>`;
+                } else {
+                    status.innerText = "❌ " + data.error;
+                }
+            } catch (error) {
+                status.innerText = "❌ حدث خطأ في الاتصال بالسيرفر.";
+            }
         }
     </script>
-
 </body>
 </html>
